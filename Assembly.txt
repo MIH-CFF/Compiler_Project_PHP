@@ -1,0 +1,20 @@
+MOV R0, #5
+MOV $a, R0
+MOV R0, #3
+MOV $b, R0
+MOV R0, $a
+MOV R1, $b
+MOV R2, #2
+MUL R1, R2
+ADD R0, R1
+MOV $c, R0
+MOV R0, $c
+MOV R1, #10
+CMPGT R0, R1
+CMP R0, #0
+JE L0
+MOV R2, $c
+MOV R3, #5
+SUB R2, R3
+MOV $d, R2
+L1:

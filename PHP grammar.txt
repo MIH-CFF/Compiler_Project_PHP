@@ -1,0 +1,61 @@
+Program → StatementList
+
+StatementList → Statement
+              | StatementList Statement          
+Statement → Assignment ';'
+          | IfStatement
+          | WhileLoop
+          | ForLoop
+          | Expression ';'
+
+Assignment → VAR '=' Expression
+           | VAR OpAssign Expression
+
+OpAssign → '+=' | '-=' | '*=' | '/=' | '%=' 
+
+Expression → Expression '||' Term
+           | Expression '&&' Term
+           | Term
+
+Term → Term '==' Factor
+     | Term '!=' Factor
+     | Term '<'  Factor
+     | Term '>'  Factor
+     | Term '<=' Factor
+     | Term '>=' Factor
+     | Factor
+
+Factor → Factor '+'  Unary
+       | Factor '-'  Unary
+       | Factor '*'  Unary
+       | Factor '/'  Unary
+       | Factor '%'  Unary
+       | Unary
+
+Unary → '!' Unary
+      | '-' Unary
+      | Primary
+
+Primary → VAR
+        | NUM
+        | '(' Expression ')'
+        | FunctionCall
+
+FunctionCall → FUNC '(' ArgumentList ')'
+
+ArgumentList → Expression
+             | ArgumentList ',' Expression
+
+FUNC → 'sqrt' | 'pow' | 'log' | 'exp' | 'sin' | 'cos' | 'tan' | 'abs'
+
+IfStatement → 'if' '(' Expression ')' Block
+            | 'if' '(' Expression ')' Block 'else' Block
+
+WhileLoop → 'while' '(' Expression ')' Block
+
+ForLoop → 'for' '(' Assignment ';' Expression ';' Assignment ')' Block
+
+Block → '{' StatementList '}'
+
+VAR → '$' [a-zA-Z_][a-zA-Z0-9_]*
+NUM → [0-9]+
