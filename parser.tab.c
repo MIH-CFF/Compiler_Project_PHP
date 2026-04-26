@@ -2092,14 +2092,14 @@ yyreduce:
     {
         char* t = new_temp();
         fprintf(tac_fp, "%s = %s()\n", t,
-                ((yyvsp[(0) - (4)].cvar)[0]=='s'?"sqrt":
-                 (yyvsp[(0) - (4)].cvar)[0]=='p'?"pow":
-                 (yyvsp[(0) - (4)].cvar)[0]=='l'?"log":
-                 (yyvsp[(0) - (4)].cvar)[0]=='e'?"exp":
-                 (yyvsp[(0) - (4)].cvar)[0]=='i'?"sin":
-                 (yyvsp[(0) - (4)].cvar)[0]=='c'?"cos":
-                 (yyvsp[(0) - (4)].cvar)[0]=='t'?"tan":"abs"));
-        if ((yyvsp[(0) - (4)].cvar)[0] == 'p') {
+                ((yyvsp[(1) - (4)].cvar)[0]=='s'?"sqrt":
+                 (yyvsp[(1) - (4)].cvar)[0]=='p'?"pow":
+                 (yyvsp[(1) - (4)].cvar)[0]=='l'?"log":
+                 (yyvsp[(1) - (4)].cvar)[0]=='e'?"exp":
+                 (yyvsp[(1) - (4)].cvar)[0]=='i'?"sin":
+                 (yyvsp[(1) - (4)].cvar)[0]=='c'?"cos":
+                 (yyvsp[(1) - (4)].cvar)[0]=='t'?"tan":"abs"));
+        if ((yyvsp[(1) - (4)].cvar)[0] == 'p') {
             char* arg2 = pop_reg();
             char* arg1 = pop_reg();
             char* res = alloc_reg();
@@ -2107,14 +2107,14 @@ yyreduce:
         } else {
             char* arg = pop_reg();
             char* res = alloc_reg();
-            switch((yyvsp[(0) - (4)].cvar)[0]) {
+            switch((yyvsp[(1) - (4)].cvar)[0]) {
                 case 's': fprintf(asm_fp, "SQRT %s, %s\n", res, arg); break;
                 case 'l': fprintf(asm_fp, "LOG %s, %s\n", res, arg); break;
                 case 'e': fprintf(asm_fp, "EXP %s, %s\n", res, arg); break;
                 case 'i': fprintf(asm_fp, "SIN %s, %s\n", res, arg); break;
                 case 'c': fprintf(asm_fp, "COS %s, %s\n", res, arg); break;
                 case 't': fprintf(asm_fp, "TAN %s, %s\n", res, arg); break;
-                case 'a': fprintf(asm_fp, "ABS %s, %s\n", res, arg); break;
+                default : fprintf(asm_fp, "ABS %s, %s\n", res, arg); break;
             }
         }
         strcpy((yyval.cvar), t);

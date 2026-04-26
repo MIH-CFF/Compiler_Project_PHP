@@ -474,14 +474,14 @@ primary:
     | FUNC '(' argument_list ')' {
         char* t = new_temp();
         fprintf(tac_fp, "%s = %s()\n", t,
-                ($<cvar>0[0]=='s'?"sqrt":
-                 $<cvar>0[0]=='p'?"pow":
-                 $<cvar>0[0]=='l'?"log":
-                 $<cvar>0[0]=='e'?"exp":
-                 $<cvar>0[0]=='i'?"sin":
-                 $<cvar>0[0]=='c'?"cos":
-                 $<cvar>0[0]=='t'?"tan":"abs"));
-        if ($<cvar>0[0] == 'p') {
+                ($<cvar>1[0]=='s'?"sqrt":
+                 $<cvar>1[0]=='p'?"pow":
+                 $<cvar>1[0]=='l'?"log":
+                 $<cvar>1[0]=='e'?"exp":
+                 $<cvar>1[0]=='i'?"sin":
+                 $<cvar>1[0]=='c'?"cos":
+                 $<cvar>1[0]=='t'?"tan":"abs"));
+        if ($<cvar>1[0] == 'p') {
             char* arg2 = pop_reg();
             char* arg1 = pop_reg();
             char* res = alloc_reg();
@@ -489,14 +489,14 @@ primary:
         } else {
             char* arg = pop_reg();
             char* res = alloc_reg();
-            switch($<cvar>0[0]) {
+            switch($<cvar>1[0]) {
                 case 's': fprintf(asm_fp, "SQRT %s, %s\n", res, arg); break;
                 case 'l': fprintf(asm_fp, "LOG %s, %s\n", res, arg); break;
                 case 'e': fprintf(asm_fp, "EXP %s, %s\n", res, arg); break;
                 case 'i': fprintf(asm_fp, "SIN %s, %s\n", res, arg); break;
                 case 'c': fprintf(asm_fp, "COS %s, %s\n", res, arg); break;
                 case 't': fprintf(asm_fp, "TAN %s, %s\n", res, arg); break;
-                case 'a': fprintf(asm_fp, "ABS %s, %s\n", res, arg); break;
+                default : fprintf(asm_fp, "ABS %s, %s\n", res, arg); break;
             }
         }
         strcpy($$, t);

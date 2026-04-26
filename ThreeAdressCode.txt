@@ -3,8 +3,12 @@ $b = 3
 t1 = $b * 2
 t2 = $a + t1
 $c = t2
+L0:
 t3 = $c > 10
-ifFalse t3 goto L0
+ifFalse t3 goto L1
 t4 = $c - 5
 $d = t4
+goto L0
 L1:
+t5 = sqrt()
+$k = t5
